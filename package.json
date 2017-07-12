@@ -1,0 +1,39 @@
+{
+  "name": "kuzzle-plugin-mqtt",
+  "author": "The Kuzzle Team <support@kuzzle.io>",
+  "version": "2.0.2",
+  "description": "Kuzzle protocol plugin MQTT",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "npm run --silent lint && npm run unit-testing --coverage",
+    "unit-testing": "nyc --reporter=text-summary --reporter=lcov mocha",
+    "lint": "eslint --max-warnings=0 ./lib ./test"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "mosca": "^2.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kuzzleio/protocol-mqtt.git"
+  },
+  "devDependencies": {
+    "codecov": "^2.2.0",
+    "eslint": "4.2.0",
+    "mocha": "3.4.2",
+    "mock-require": "^2.0.2",
+    "nyc": "^11.0.3",
+    "rewire": "2.5.2",
+    "should": "11.2.1",
+    "should-sinon": "0.0.5",
+    "sinon": "2.3.7"
+  },
+  "engines": {
+    "node": ">= 4.4.5",
+    "npm": ">= 2.14.4"
+  },
+  "license": "Apache-2.0"
+}
