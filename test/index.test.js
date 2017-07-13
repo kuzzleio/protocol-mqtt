@@ -12,9 +12,12 @@ describe('mqtt', () => {
     .withArgs('ready')
     .yields();
   const moscaMock = function (config) {
-    this.config = config;         // eslint-disable-line no-invalid-this
-    this.on = moscaOnMock;        // eslint-disable-line no-invalid-this
-    this.publish = sinon.spy();   // eslint-disable-line no-invalid-this
+    // eslint-disable-next-line no-invalid-this
+    this.config = config;
+    // eslint-disable-next-line no-invalid-this
+    this.on = moscaOnMock;
+    // eslint-disable-next-line no-invalid-this
+    this.publish = sinon.spy();
   };
 
   mockrequire('mosca', {
@@ -29,7 +32,13 @@ describe('mqtt', () => {
 
   beforeEach(() => {
     entrypoint = {
-      config: {},
+      config: {
+        protocols: {
+          mqtt: {
+            foo: 'bar'
+          }
+        }
+      },
       execute: sinon.spy(),
       newConnection: sinon.spy(),
       removeConnection: sinon.spy()
