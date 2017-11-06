@@ -10,11 +10,11 @@ This protocol can be configured via Kuzzle'rc configuration, under `server > pro
 | property | default | type | description
 |---|---|---|---
 | ``allowPubSub`` | `false` | Boolean | Allow MQTT pub/sub capabilities or restrict to Kuzzle requests only 
-| ``port`` | ``1883`` | Integer > 1024 | Network port to open 
-| ``requestTopic`` | ``"Kuzzle/request"`` | String | Name of the topic listened by the plugin for requests 
-| ``responseTopic`` | ``"Kuzzle/response"`` | String | Name of the topic clients should listen to get requests result 
 | ``developmentMode`` | `false` | Boolean | Switches `responseTopic` back to a regular public topic
 | ``disconnectDelay`` | 250 | Integer | Delay in ms to apply between a disconnection notification is received and the connection is actually removed
+| ``requestTopic`` | ``"Kuzzle/request"`` | String | Name of the topic listened by the plugin for requests 
+| ``responseTopic`` | ``"Kuzzle/response"`` | String | Name of the topic clients should listen to get requests result 
+| ``server`` | `{port: 1883}` | Object | Constructor options passed to underlying mqtt server. See [mosca documentation](https://github.com/mcollina/mosca/wiki/Mosca-advanced-usage#other-options-of-mosca-the-ones-we-inserted-in-our-moscasettings-var) for further reference.
 
 example:
 
