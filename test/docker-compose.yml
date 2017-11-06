@@ -12,7 +12,7 @@ services:
       - kuzzle_services__db__client__host=http://elasticsearch:9200
       - kuzzle_services__internalCache__node__host=redis
       - kuzzle_services__memoryStorage__node__host=redis
-      - kuzzle_server__protocols__mqtt__debugMode=true
+      - kuzzle_server__protocols__mqtt__developmentMode=true
       - NODE_ENV=${NODE_ENV:-development}
       - DEBUG=${DEBUG:-kuzzle:entry-point:protocols}
 
