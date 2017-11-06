@@ -13,6 +13,8 @@ This protocol can be configured via Kuzzle'rc configuration, under `server > pro
 | ``port`` | ``1883`` | Integer > 1024 | Network port to open 
 | ``requestTopic`` | ``"Kuzzle/request"`` | String | Name of the topic listened by the plugin for requests 
 | ``responseTopic`` | ``"Kuzzle/response"`` | String | Name of the topic clients should listen to get requests result 
+| ``developmentMode`` | `false` | Boolean | Switches `responseTopic` back to a regular public topic
+| ``disconnectDelay`` | 250 | Integer | Delay in ms to apply between a disconnection notification is received and the connection is actually removed
 
 example:
 
@@ -41,6 +43,7 @@ The order of responses is not guaranteed to be the same than the order of reques
 To link a response to its original request, use the `requestId` attribute: the response will have the same `requestId` than the one provided in the request.
 
 Example using the [MQTT NodeJS module](https://www.npmjs.com/package/mqtt):
+_to use a cli client, you will need to enable development mode, please refer to [the dedicated section below](#development-mode) for instruction and examples_
 
 ```js
 const
@@ -140,5 +143,30 @@ If a client tries to publish to an unauthorized topic, his connection will immed
 
 Subscription attempts to the ``requestTopic`` topic (defaults: `Kuzzle/request`) are ignored: client requests can only be listened by the MQTT server.
 
+# Development mode
 
+The MQTT `Kuzzle/response` topic is by default a special topic that acts as a private channel. Each client receives its own responses only, offering a simple first security layer.
+
+While this behaviour is urgently recommended in production, it can bring a small drawback when testing and developping applications: it does not allow using most CLI tools.
+Many CLI tools, such as Mosquitto offer two separate binaries, one for subscribing and one for publishing. These act as two different clients and the subscriber won't by default receive any response sent to the publisher.
+
+To use these tools, one can enable the **development mode**, in which `Kuzzle/response` will act as a regular public topic.
+
+:warning: **Do not use development mode in production!**
+
+To enable development mode, you will need to **both** set `NODE_ENV` environment variable to `development` and set the mqtt protocol `developmentMode` to true:
+
+```
+# starting kuzzle with mqtt development mode enabled
+NODE_ENV=development kuzzle_server__protocols__mqtt__developmentMode=true ./bin/kuzzle start
+
+# client 1
+$ mosquitto_sub -t Kuzzle/response
+
+# client 2
+$ mosquitto_pub -t Kuzzle/request -m '{"controller": "server", "action": "now"}'
+
+# client 1
+{"requestId":"83a63209-7633-4884-9f1a-c490ce446ddf","status":200,"error":null,"controller":"server","action":"now","collection":null,"index":null,"volatile":null,"result":{"now":1509967201489}}
+```
 
