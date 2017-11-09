@@ -1,28 +1,30 @@
-version: '2'
+version: '3'
 
 services:
-  proxy:
-    image: kuzzleio/proxy:develop
-    volumes:
-      - ..:/tmp/kuzzle-plugin-mqtt
-    environment:
-      - proxy_protocolPlugins__kuzzle-plugin-mqtt__path=/tmp/kuzzle-plugin-mqtt
-    ports:
-      - "7511-7513:7511-7513"
-
   kuzzle:
     image: kuzzleio/kuzzle:develop
+    ports:
+      - 7512:7512
+      - 1883:1883
+    volumes:
+      - ..:/var/app/protocols/enabled/mqtt
     environment:
-      - kuzzle_services__db__host=elasticsearch
+      - kuzzle_services__db__client__host=http://elasticsearch:9200
       - kuzzle_services__internalCache__node__host=redis
       - kuzzle_services__memoryStorage__node__host=redis
-      - kuzzle_services__proxyBroker__host=proxy
-      - FEATURE_COVERAGE=1
+      - kuzzle_server__protocols__mqtt__developmentMode=true
+      - NODE_ENV=${NODE_ENV:-development}
+      - DEBUG=${DEBUG:-kuzzle:entry-point:protocols}
 
   redis:
     image: redis:3.2
 
   elasticsearch:
-    image: elasticsearch:2
-
-
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.4.1
+    environment:
+      - cluster.name=kuzzle
+      # disable xpack
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.graph.enabled=false
+      - xpack.watcher.enabled=false

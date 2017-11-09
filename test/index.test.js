@@ -27,8 +27,17 @@ describe('mqtt', () => {
 
   let
     context,
+    clock,
     entrypoint,
     protocol;
+
+  before(() => {
+    clock = sinon.useFakeTimers();
+  });
+
+  after(() => {
+    clock.restore();
+  });
 
   beforeEach(() => {
     entrypoint = {
@@ -291,6 +300,7 @@ describe('mqtt', () => {
       };
 
       protocol.onDisconnection(client);
+      clock.tick(protocol.config.disconnectDelay + 1);
 
       should(entrypoint.removeConnection)
         .be.calledOnce()

@@ -26,7 +26,6 @@
     "mocha": "3.4.2",
     "mock-require": "^2.0.2",
     "nyc": "^11.0.3",
-    "rewire": "2.5.2",
     "should": "11.2.1",
     "should-sinon": "0.0.5",
     "sinon": "2.3.7"
