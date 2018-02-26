@@ -3,6 +3,20 @@
 
 MQTT protocol for [Kuzzle](https://github.com/kuzzleio/kuzzle).
 
+# Installation
+
+Clone this repository into kuzzle's `protocols/enabled` directory and run `npm install`:
+
+```
+cd path/to/kuzzle
+mkdir -p protocols/enabled
+
+git clone https://github.com/kuzzleio/protocol-mqtt.git protocols/enabled/mqtt
+
+cd protocols/enabled/mqtt
+npm install
+```
+
 # Configuration
 
 This protocol can be configured via Kuzzle'rc configuration, under `server > protocols > mqtt` section.
