@@ -1,6 +1,7 @@
 language: node_js
 node_js:
 - '6'
+before_install: npm i -g npm@6
 script:
 - npm install --unsafe && npm test && npm run codecov
 env:
