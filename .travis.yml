@@ -3,7 +3,7 @@ node_js:
 - '6'
 before_install: npm i -g npm@6
 script:
-- npm install --unsafe && npm test && npm run codecov
+- npm install --unsafe-perm && npm test && npm run codecov
 env:
 - CXX=g++-4.8
 addons:
