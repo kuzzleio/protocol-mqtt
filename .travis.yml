@@ -20,11 +20,3 @@ notifications:
     on_failure: always
     on_start: never
   email: false
-deploy:
-  provider: npm
-  email: support@kuzzle.io
-  api_key:
-    secure: sj3NawxDhrhbrQavN7LMoqEWqJEZMFrsc5gAtq5K4BHfCq5rcNmgaBv0cCn4o5L3x8IHoati5A0oSQheKGgissl+Dcd4LkIwz+ZDpCA0LRK2qo56b7eTLZ5hfxXmW8AJQ3C4dmVvW97QvHw6ELw2Z9S6s/G1WsBv6mERhFatiMBj0RVJuB+x4pDb6MmF1Fc2Wma49IYzeCsZW6cfzuzgXS5xfT2setdk70VQIBrEsokbGfH19epvnHdVpvGch0ZdwYHl67joBuVgxpo+PFmafKEQ4AX7p0001YIz7bTTD2sDZf9OheW/uKOUUOjeEeffxQE6Xiur2u5/1t6HsdPGeFCIVdy9pWv9ta1tld3jEF6LlrVanWd8RrKyoxtYUa2F7rrK4YmMWB/VpJdh+RrM/QFtiJEtXXp6MwJwNgmpF67vprrTtjmUR6z8JTxYJRRIhvUUgw+zCnNNERxaPCcm8BaXQYIJxoEFMbmTmRAB1Q6tkwMTMADwF7lS54P4PGoi7GNCi28fxDyC0tkWPK/7lFbSKHPwhVi/zkNTCn8mFX9t5s+XiSHfbNG3iYj/tGaOUhInGokz05bbk3PnLwEzH7r2/qAzbfEThEnK2zjfIUWRpeeBkYiuVBpryzp/ZQNJ4w88JfIrVqzLzK+/h+rLkZkPc864dTZYC3QhOrpPfTw=
-  on:
-    repo: kuzzleio/protocol-mqtt
-    branch: master
