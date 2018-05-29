@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kuzzleio/kuzzle-plugin-mqtt.svg?branch=master)](https://travis-ci.org/kuzzleio/kuzzle-plugin-mqtt) [![codecov.io](http://codecov.io/github/kuzzleio/kuzzle-plugin-mqtt/coverage.svg?branch=master)](http://codecov.io/github/kuzzleio/kuzzle-plugin-mqtt?branch=master) [![Dependency Status](https://david-dm.org/kuzzleio/kuzzle-plugin-mqtt.svg)](https://david-dm.org/kuzzleio/kuzzle-plugin-mqtt)
+[![Build Status](https://travis-ci.org/kuzzleio/protocol-mqtt.svg?branch=master)](https://travis-ci.org/kuzzleio/protocol-mqtt) [![codecov.io](http://codecov.io/github/kuzzleio/protocol-mqtt/coverage.svg?branch=master)](http://codecov.io/github/kuzzleio/protocol-mqtt?branch=master) [![Dependency Status](https://david-dm.org/kuzzleio/protocol-mqtt.svg)](https://david-dm.org/kuzzleio/protocol-mqtt)
 
 
 MQTT protocol for [Kuzzle](https://github.com/kuzzleio/kuzzle).
@@ -8,14 +8,17 @@ MQTT protocol for [Kuzzle](https://github.com/kuzzleio/kuzzle).
 Clone this repository into kuzzle's `protocols/enabled` directory and run `npm install`:
 
 ```
-cd path/to/kuzzle
-mkdir -p protocols/enabled
+mkdir -p <kuzzle path>/protocols/available
+mkdir -p <kuzzle path>/protocols/enabled
 
-git clone https://github.com/kuzzleio/protocol-mqtt.git protocols/enabled/mqtt
+git clone https://github.com/kuzzleio/protocol-mqtt.git <kuzzle path>/protocols/available/mqtt
+ln -s <kuzzle path>/protocols/available/mqtt <kuzzle path>/protocols/enabled
 
-cd protocols/enabled/mqtt
-npm install
+cd <kuzzle path>/protocols/enabled/mqtt
+npm install # Add --unsafe-perm if installing from inside a docker container
 ```
+
+**Note:** Do not mind compilation errors, they are from an optional dependency in one of the communication module this protocol uses. If these errors bother you and you do want to get rid of them, simply follow the [zmq node module installation process](https://www.npmjs.com/package/zmq#installation).
 
 # Configuration
 
@@ -23,16 +26,16 @@ This protocol can be configured via Kuzzle'rc configuration, under `server > pro
 
 | property | default | type | description
 |---|---|---|---
-| ``allowPubSub`` | `false` | Boolean | Allow MQTT pub/sub capabilities or restrict to Kuzzle requests only 
+| ``allowPubSub`` | `false` | Boolean | Allow MQTT pub/sub capabilities or restrict to Kuzzle requests only
 | ``developmentMode`` | `false` | Boolean | Switches `responseTopic` back to a regular public topic
 | ``disconnectDelay`` | 250 | Integer | Delay in ms to apply between a disconnection notification is received and the connection is actually removed
-| ``requestTopic`` | ``"Kuzzle/request"`` | String | Name of the topic listened by the plugin for requests 
-| ``responseTopic`` | ``"Kuzzle/response"`` | String | Name of the topic clients should listen to get requests result 
+| ``requestTopic`` | ``"Kuzzle/request"`` | String | Name of the topic listened by the plugin for requests
+| ``responseTopic`` | ``"Kuzzle/response"`` | String | Name of the topic clients should listen to get requests result
 | ``server`` | `{port: 1883}` | Object | Constructor options passed to underlying mqtt server. See [mosca documentation](https://github.com/mcollina/mosca/wiki/Mosca-advanced-usage#other-options-of-mosca-the-ones-we-inserted-in-our-moscasettings-var) for further reference.
 
 example:
 
-`.kuzzlerc`  
+`.kuzzlerc`
 ```json
 {
   "server": {

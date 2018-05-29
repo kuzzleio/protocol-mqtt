@@ -1,10 +1,9 @@
 language: node_js
 node_js:
-- 4.2
-before_script:
-- npm install -g grunt-cli
+- '6'
+before_install: npm i -g npm@6
 script:
-- npm test && cat ./coverage/lcov.info | ./node_modules/.bin/codecov
+- npm install --unsafe-perm && npm test && npm run codecov
 env:
 - CXX=g++-4.8
 addons:
@@ -21,11 +20,3 @@ notifications:
     on_failure: always
     on_start: never
   email: false
-deploy:
-  provider: npm
-  email: support@kuzzle.io
-  api_key:
-    secure: BHrukvPEzicmqU30qpdQNfQcCQluseGkXfg9izr7yH5JA9Z01EoD43/ixofwwRqyblYMBZ3G6qlGBswrmRof3mKUrRFT3Y/td+h+bgdnzRQ/O8imLLLfLrti5aOlZi3piZpeuvALbE/fSEoZJljTwGFl3is5m+K5Dw0IQszOa/0M/4QrzxjWUzll8DGd1NNuKojj2aVmu7Yl4IRHPSYkkDA/r3n0lTpsZovi/N4c3mtb0bI/tV4QL9v2O3UlE+rVdM+cjhOfGySmKI8r+xoOTNC5kVt5hUY/XajhOPjxgk9lJ0838pvvQ3dhtVbJIVrYdBLK6Nk3pUW/geeJgTm2l5O/m8UVCe4d3/yINQtgyMOsRANGY9xnYbDyMVYXP8ExYSGq30DQ+m/0KJXxvSuhccWhxQ+kmJf+olRaku3NMf0LgxAX2ZQ6rT0Ga2028oel5R66jIl6MSG4sf15dHUWB3tAHNn3Z8qnjhIftrz4MXGzsEli0T5VGxWp89Nu7Uxj1eYIpEMjY3ig0ueyIeloWoQj/vnwgNyUlzXhIG8+bB848pbxvlWQOZ3wqQdi8075ETpOHfDfQHYKUsmedrPR4RbP5GBmv9U29/UmX3JecW/BBNEdkm01FjBr3K8xkttSOHFOF1ygCJSVgpEiVttHICaY0G8/N3Hkm4AmzW2zIJc=
-  on:
-    repo: kuzzleio/kuzzle-plugin-mqtt
-    branch: master
