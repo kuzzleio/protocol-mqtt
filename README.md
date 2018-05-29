@@ -15,7 +15,7 @@ git clone https://github.com/kuzzleio/protocol-mqtt.git <kuzzle path>/protocols/
 ln -s <kuzzle path>/protocols/available/mqtt <kuzzle path>/protocols/enabled
 
 cd <kuzzle path>/protocols/enabled/mqtt
-npm install # Add --unsafe if installing from inside a docker container
+npm install # Add --unsafe-perm if installing from inside a docker container
 ```
 
 **Note:** Do not mind compilation errors, they are from an optional dependency in one of the communication module this protocol uses. If these errors bother you and you do want to get rid of them, simply follow the [zmq node module installation process](https://www.npmjs.com/package/zmq#installation).
