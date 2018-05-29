@@ -14,21 +14,21 @@
   },
   "dependencies": {
     "bluebird": "^3.5.0",
-    "mosca": "^2.1.0"
+    "mosca": "^2.8.1"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/kuzzleio/protocol-mqtt.git"
   },
   "devDependencies": {
-    "codecov": "^2.2.0",
-    "eslint": "4.2.0",
-    "mocha": "3.4.2",
-    "mock-require": "^2.0.2",
+    "codecov": "^3.0.2",
+    "eslint": "4.19.1",
+    "mocha": "5.2.0",
+    "mock-require": "^3.0.2",
     "nyc": "^11.0.3",
-    "should": "11.2.1",
-    "should-sinon": "0.0.5",
-    "sinon": "2.3.7"
+    "should": "13.2.1",
+    "should-sinon": "0.0.6",
+    "sinon": "5.0.10"
   },
   "engines": {
     "node": ">= 4.4.5",
