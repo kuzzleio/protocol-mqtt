@@ -80,7 +80,7 @@ describe('mqtt', () => {
         .be.calledWith('clientDisconnecting')
         .be.calledWith('clientDisconnected')
         .be.calledWith('published');
-      
+
       {
         const cb = protocol.server.on.getCall(1).args[1];
         cb('test');
@@ -108,8 +108,8 @@ describe('mqtt', () => {
           .be.calledOnce()
           .be.calledWith('packet', 'client');
       }
-      
-      
+
+
     });
 
     describe('#authorizePublish', () => {
@@ -128,35 +128,35 @@ describe('mqtt', () => {
         tests.push(auth('client', 'topic', 'payload')
           .then(res => should(res).be.false())
         );
-        
+
         tests.push(auth('client', protocol.config.requestTopic, 'payload')
           .then(res => should(res).be.true())
         );
 
         return Bluebird.all(tests);
       });
-      
+
       it('should allow allow any topic different than the response one, provided it does not contain any wildcard', () => {
         protocol.config.allowPubSub = true;
-        
+
         const tests = [];
-        
+
         tests.push(auth('client', 'topic', 'payload')
           .then(res => should(res).be.true())
         );
-        
+
         tests.push(auth('client', protocol.config.responseTopic, 'payload')
           .then(res => should(res).be.false())
         );
-        
+
         tests.push(auth('client', 'wildcard#forbidden', 'payload')
           .then(res => should(res).be.false())
         );
-        
+
         tests.push(auth('client', 'wildcard+forbidden', 'payload')
           .then(res => should(res).be.false())
         );
-        
+
         return Bluebird.all(tests);
       });
     });
@@ -237,7 +237,7 @@ describe('mqtt', () => {
           forward: sinon.spy()
         }
       };
-      
+
       protocol.notify({
         connectionId: 'id',
         payload: 'payload',
@@ -246,11 +246,11 @@ describe('mqtt', () => {
           'ch2'
         ]
       });
-      
+
       should(protocol.connectionsById.id.forward)
         .be.calledTwice()
         .be.calledWith('ch1', '"payload"', {}, 'ch1', 0);
-      
+
       should(protocol.connectionsById.foo.forward)
         .have.callCount(0);
     });
@@ -274,7 +274,7 @@ describe('mqtt', () => {
         .length(1);
 
       const connectionId = Object.keys(protocol.connectionsById)[0];
-      should(protocol.connections.get(client))
+      should(protocol.connections.get(client).id)
         .be.exactly(connectionId);
 
       should(entrypoint.newConnection)
@@ -294,7 +294,7 @@ describe('mqtt', () => {
     it('should remove the connection', () => {
       const client = {};
 
-      protocol.connections.set(client, 'id');
+      protocol.connections.set(client, {id: 'id'});
       protocol.connectionsById = {
         id: client
       };
@@ -346,7 +346,7 @@ describe('mqtt', () => {
         id: 'clientId',
         forward: sinon.spy()
       };
-      protocol.connections.set(client, 'id');
+      protocol.connections.set(client, {id: 'id', protocol: 'mqtt'});
 
       protocol.onMessage({
         topic: protocol.config.requestTopic,
@@ -358,6 +358,10 @@ describe('mqtt', () => {
         .be.calledWith({
           foo: 'bar'
         }, {
+          connection: {
+            id: 'id',
+            protocol: 'mqtt'
+          },
           connectionId: 'id',
           protocol: 'mqtt'
         });
