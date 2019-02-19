@@ -1,3 +1,5 @@
+:warning: This plugin has been integrated to Kuzzle core and is now DEPRECATED :warning:
+
 [![Build Status](https://travis-ci.org/kuzzleio/protocol-mqtt.svg?branch=master)](https://travis-ci.org/kuzzleio/protocol-mqtt) [![codecov.io](http://codecov.io/github/kuzzleio/protocol-mqtt/coverage.svg?branch=master)](http://codecov.io/github/kuzzleio/protocol-mqtt?branch=master) [![Dependency Status](https://david-dm.org/kuzzleio/protocol-mqtt.svg)](https://david-dm.org/kuzzleio/protocol-mqtt)
 
 
